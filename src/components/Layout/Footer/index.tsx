@@ -22,8 +22,7 @@ const footer = () => {
       .catch(() => setFooterData(null));
   }, []);
 
-  if (!footerData)
-    return <FooterSkeleton />;
+  if (!footerData) return <FooterSkeleton />;
 
   return (
     <footer className="bg-deepSlate py-10">
