@@ -3,27 +3,14 @@ import Link from "next/link";
 import Logo from "../Header/Logo";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { headerData } from "../Header/Navigation/menuData";
-import { useEffect, useState } from "react";
-import { getFooterData } from "@/services/apiService";
+import { useContext } from "react";
+import SiteSettingsContext from "@/context/SiteSettingsContext";
 import FooterSkeleton from "./FooterSkeleton";
 
 const footer = () => {
-  type FooterType = {
-    address: string;
-    phone: string;
-    email: string;
-    copyright: string;
-  };
-  const [footerData, setFooterData] = useState<FooterType | null>(null);
-
-  useEffect(() => {
-    getFooterData<FooterType>()
-      .then((data) => setFooterData(data))
-      .catch(() => setFooterData(null));
-  }, []);
-
-  if (!footerData) return <FooterSkeleton />;
-
+  const siteSettings = useContext(SiteSettingsContext);
+        
+  if (!siteSettings) return <FooterSkeleton />;
   return (
     <footer className="bg-deepSlate py-10">
       <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
@@ -59,19 +46,19 @@ const footer = () => {
             <h3 className="mb-4 text-2xl font-medium">Other</h3>
             <ul>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">About Us</Link>
+                <Link href="#">Tentang Kami</Link>
               </li>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">Our Team</Link>
+                <Link href="#">Tim Kami</Link>
               </li>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">career</Link>
+                <Link href="#">Karir</Link>
               </li>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">Services</Link>
+                <Link href="#">Layanan</Link>
               </li>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">Contact</Link>
+                <Link href="#">Kontak</Link>
               </li>
             </ul>
           </div>
@@ -81,28 +68,28 @@ const footer = () => {
                 icon="tabler:brand-google-maps"
                 className="text-primary text-3xl inline-block me-2"
               />
-              <h5 className="text-lg text-black/60">{footerData.address}</h5>
+              <h5 className="text-lg text-black/60">Alamat: {siteSettings.address}</h5>
             </div>
             <div className="flex gap-2 mt-10">
               <Icon
                 icon="tabler:phone"
                 className="text-primary text-3xl inline-block me-2"
               />
-              <h5 className="text-lg text-black/60">{footerData.phone}</h5>
+              <h5 className="text-lg text-black/60">Telepon: {siteSettings.phone}</h5>
             </div>
             <div className="flex gap-2 mt-10">
               <Icon
-                icon="tabler:folder"
+                icon="tabler:mail"
                 className="text-primary text-3xl inline-block me-2"
               />
-              <h5 className="text-lg text-black/60">{footerData.email}</h5>
+              <h5 className="text-lg text-black/60">Email: {siteSettings.email}</h5>
             </div>
           </div>
         </div>
 
         <div className="mt-10 lg:flex items-center justify-between">
           <h4 className="text-black/50 text-sm text-center lg:text-start font-normal">
-            {footerData.copyright}
+            {siteSettings.copyright}
           </h4>
           <div className="flex gap-5 mt-5 lg:mt-0 justify-center lg:justify-start">
             <Link

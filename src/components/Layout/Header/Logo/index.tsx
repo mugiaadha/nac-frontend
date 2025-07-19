@@ -1,18 +1,22 @@
-import { getImagePrefix } from "@/utils/util";
+import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SiteSettingsContext from "@/context/SiteSettingsContext";
 
 const Logo: React.FC = () => {
+  const siteSettings = useContext(SiteSettingsContext);
   return (
     <Link href="/">
-      <Image
-        src= {`${getImagePrefix()}images/logo/logo.svg`}
-        alt="logo"
-        width={160}
-        height={50}
-        style={{ width: "auto", height: "auto" }}
-        quality={100}
-      />
+      {siteSettings?.logo && (
+        <Image
+          src={`${process.env.NEXT_PUBLIC_STORAGE_BASE_URL}/${siteSettings.logo}`}
+          alt="logo"
+          width={160}
+          height={50}
+          style={{ width: "auto", height: "auto" }}
+          quality={100}
+        />
+      )}
     </Link>
   );
 };

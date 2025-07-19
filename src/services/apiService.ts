@@ -11,7 +11,7 @@ export async function getData<T>(endpoint: string): Promise<T> {
 
 // Contoh endpoint spesifik
 export async function getFooterData<T>(): Promise<T> {
-  return getData<T>("/api/footer");
+  return getData<T>("/api/site-settings");
 }
 
 // Tambahkan endpoint lain sesuai kebutuhan

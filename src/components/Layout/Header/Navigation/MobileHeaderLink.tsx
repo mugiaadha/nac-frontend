@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Image from "next/image";
+import SiteSettingsContext from "@/context/SiteSettingsContext";
 import Link from "next/link";
 import { HeaderItem } from "../../../../types/menu";
 
@@ -9,6 +11,7 @@ const MobileHeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
     setSubmenuOpen(!submenuOpen);
   };
 
+  const siteSettings = useContext(SiteSettingsContext);
   return (
     <div className="relative w-full">
       <Link
@@ -16,6 +19,15 @@ const MobileHeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
         onClick={item.submenu ? handleToggle : undefined}
         className="flex items-center justify-between w-full py-2 text-muted focus:outline-none"
       >
+        {siteSettings?.logo && (
+          <Image
+            src={siteSettings.logo}
+            alt="logo"
+            width={32}
+            height={32}
+            style={{ width: "auto", height: "auto" }}
+          />
+        )}
         {item.label}
         {item.submenu && (
           <svg

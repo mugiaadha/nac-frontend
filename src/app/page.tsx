@@ -14,10 +14,10 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Companies />
       <Courses />
       <Mentor />
       <Testimonial />
+      <Companies />
       <Newsletter />
     </main>
   );

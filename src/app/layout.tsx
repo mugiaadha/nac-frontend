@@ -4,7 +4,11 @@ import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "@/components/ScrollToTop";
-const font = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], });
+import SiteSettingsProvider from "./SiteSettingsProvider";
+const font = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export default function RootLayout({
   children,
@@ -19,10 +23,12 @@ export default function RootLayout({
           enableSystem={true}
           defaultTheme="light"
         >
-          <Header />
-          {children}
-          <Footer />
-          <ScrollToTop />
+          <SiteSettingsProvider>
+            <Header />
+            {children}
+            <Footer />
+            <ScrollToTop />
+          </SiteSettingsProvider>
         </ThemeProvider>
       </body>
     </html>
