@@ -30,6 +30,7 @@ const Logo: React.FC = () => {
           alt="logo"
           width={160}
           height={50}
+          priority={true}
           style={{ 
             width: "auto", 
             height: "auto",

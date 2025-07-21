@@ -22,7 +22,7 @@ const Logo: React.FC<LogoProps> = ({
   width = 120,
   height = 40,
   className = "",
-  priority = false,
+  priority = true, // Default to true for better LCP optimization
   style,
   useSiteSettings = false,
   fallbackText = "Logo",
