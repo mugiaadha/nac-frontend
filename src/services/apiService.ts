@@ -31,8 +31,9 @@ export async function login(
   password: string
 ): Promise<LoginResponse> {
   try {
-    const res = await fetch(BASE_URL + "/api/auth/login", {
+    const res = await fetch(BASE_URL + "/api/session-login", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });

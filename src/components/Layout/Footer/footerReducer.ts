@@ -1,4 +1,4 @@
-export type FooterType = {
+export type SiteSettings = {
   address: string;
   phone: string;
   email: string;
@@ -7,14 +7,17 @@ export type FooterType = {
 };
 
 export type FooterAction =
-  | { type: 'SET_DATA'; payload: FooterType }
-  | { type: 'ERROR' };
+  | { type: "SET_DATA"; payload: SiteSettings }
+  | { type: "ERROR" };
 
-export function footerReducer(state: FooterType | null, action: FooterAction): FooterType | null {
+export function footerReducer(
+  state: SiteSettings | null,
+  action: FooterAction
+): SiteSettings | null {
   switch (action.type) {
-    case 'SET_DATA':
+    case "SET_DATA":
       return { ...action.payload };
-    case 'ERROR':
+    case "ERROR":
       return null;
     default:
       return state;
