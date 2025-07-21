@@ -1,0 +1,48 @@
+name: Deploy Next.js App to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Deploy to VPS via rsync
+        uses: easingthemes/ssh-deploy@v4
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          TARGET: /var/www/nextjs-app
+          SOURCE: .
+          EXCLUDE: node_modules, .git, .env.local, .env.development.local, .env.test.local, .env.production.local, .next/cache
+          ARGS: -avz --delete
+          SCRIPT_AFTER: |
+            cd /var/www/nextjs-app
+            # Install dependencies on server
+            npm ci --only=production
+            # Set proper permissions
+            sudo chown -R www-data:www-data /var/www/nextjs-app
+            sudo chmod -R 755 /var/www/nextjs-app
+            # Restart PM2 process (assuming you're using PM2 to manage Next.js)
+            pm2 reload nextjs-app || pm2 start npm --name "nextjs-app" -- start
+            # Or restart systemd service if using systemd
+            # sudo systemctl restart nextjs-app

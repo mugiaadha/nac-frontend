@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useReducer, ReactNode } from "react";
-import { getFooterData } from "@/services/apiService";
+import { getSiteData } from "@/services/apiService";
 import SiteSettingsContext, { SiteSettingsType } from "@/context/SiteSettingsContext";
 
 function siteSettingsReducer(state: SiteSettingsType | null, action: { type: 'SET_DATA'; payload: SiteSettingsType } | { type: 'ERROR' }): SiteSettingsType | null {
@@ -20,7 +20,7 @@ export default function SiteSettingsProvider({ children }: { children: ReactNode
   const [siteSettings, dispatch] = useReducer(siteSettingsReducer, initialState);
 
   useEffect(() => {
-    getFooterData<{ data: SiteSettingsType }>()
+    getSiteData<{ data: SiteSettingsType }>()
       .then((res) => dispatch({ type: "SET_DATA", payload: res.data }))
       .catch(() => dispatch({ type: "ERROR" }));
   }, []);

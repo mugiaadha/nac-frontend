@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useReducer, ReactNode } from "react";
-import { getFooterData } from "@/services/apiService";
+import { getSiteData } from "@/services/apiService";
 import {
   footerReducer,
   FooterType,
@@ -13,7 +13,7 @@ export default function Providers({ children }: { children: ReactNode }) {
   const [footerData, dispatch] = useReducer(footerReducer, initialState);
 
   useEffect(() => {
-    getFooterData<FooterType>()
+    getSiteData<FooterType>()
       .then((data) => dispatch({ type: "SET_DATA", payload: data }))
       .catch(() => dispatch({ type: "ERROR" }));
   }, []);
