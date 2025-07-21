@@ -44,13 +44,7 @@ const Hero = () => {
 
                     </div>
                     <div className='col-span-6 flex justify-center'>
-                        <Image 
-                          src={`${getImagePrefix()}images/banner/mahila.png`} 
-                          alt="Hero banner image" 
-                          width={1000} 
-                          height={805} 
-                          priority
-                        />
+                        <Image src={`${getImagePrefix()}images/banner/mahila.png`} alt="nothing" width={1000} height={805} />
                     </div>
                 </div>
 
