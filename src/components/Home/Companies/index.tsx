@@ -58,13 +58,14 @@ const Companies = () => {
         <div className="py-14 border-b ">
           <Slider {...settings}>
             {TruestedCompanies.map((item, i) => (
-              <div key={i}>
+              <div key={i} className="flex justify-center">
                 <Logo
                   src={item.imgSrc}
                   alt={item.imgSrc}
                   width={116}
                   height={36}
-                  style={{ width: "50%", height: "auto" }}
+                  priority={false}
+                  className="max-w-full h-auto"
                 />
               </div>
             ))}

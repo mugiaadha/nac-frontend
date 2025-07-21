@@ -73,7 +73,12 @@ const Logo: React.FC<LogoProps> = ({
           }`}
           onLoad={handleImageLoad}
           onError={handleImageError}
-          style={{ width: "100%", height: "auto" }}
+          style={{ 
+            width: "auto", 
+            height: "auto",
+            maxWidth: "100%",
+            ...style 
+          }}
         />
       )}
       
