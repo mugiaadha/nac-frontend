@@ -4,8 +4,8 @@ import { getSiteData } from "@/services/apiService";
 import {
   siteReducer,
   SiteSettings,
-} from "@/components/Layout/Footer/footerReducer";
-import SiteContext from "@/components/Layout/Footer/SiteContext";
+} from "@/components/Layout/Footer/siteReducer";
+import SiteSettingsContext from "@/context/SiteSettingsContext";
 
 const initialState: SiteSettings | null = null;
 
@@ -19,6 +19,6 @@ export default function Providers({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <SiteContext.Provider value={siteData}>{children}</SiteContext.Provider>
+    <SiteSettingsContext.Provider value={siteData}>{children}</SiteSettingsContext.Provider>
   );
 }

@@ -1,13 +1,5 @@
 import { createContext } from "react";
+import { SiteSettings } from "@/components/Layout/Footer/siteReducer";
 
-export type SiteSettingsType = {
-  logo: string;
-  address: string;
-  phone: string;
-  email: string;
-  copyright: string;
-  // tambahkan field lain sesuai kebutuhan
-};
-
-const SiteSettingsContext = createContext<SiteSettingsType | null>(null);
+const SiteSettingsContext = createContext<SiteSettings | null>(null);
 export default SiteSettingsContext;
