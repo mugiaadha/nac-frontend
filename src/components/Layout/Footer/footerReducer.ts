@@ -6,13 +6,13 @@ export type SiteSettings = {
   logo: string;
 };
 
-export type FooterAction =
+export type SiteAction =
   | { type: "SET_DATA"; payload: SiteSettings }
   | { type: "ERROR" };
 
-export function footerReducer(
+export function siteReducer(
   state: SiteSettings | null,
-  action: FooterAction
+  action: SiteAction
 ): SiteSettings | null {
   switch (action.type) {
     case "SET_DATA":

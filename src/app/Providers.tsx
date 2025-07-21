@@ -2,15 +2,15 @@
 import { useEffect, useReducer, ReactNode } from "react";
 import { getSiteData } from "@/services/apiService";
 import {
-  footerReducer,
+  siteReducer,
   SiteSettings,
 } from "@/components/Layout/Footer/footerReducer";
-import FooterContext from "@/components/Layout/Footer/FooterContext";
+import SiteContext from "@/components/Layout/Footer/SiteContext";
 
 const initialState: SiteSettings | null = null;
 
 export default function Providers({ children }: { children: ReactNode }) {
-  const [siteSettings, dispatch] = useReducer(footerReducer, initialState);
+  const [siteData, dispatch] = useReducer(siteReducer, initialState);
 
   useEffect(() => {
     getSiteData<SiteSettings>()
@@ -19,8 +19,6 @@ export default function Providers({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <FooterContext.Provider value={siteSettings}>
-      {children}
-    </FooterContext.Provider>
+    <SiteContext.Provider value={siteData}>{children}</SiteContext.Provider>
   );
 }

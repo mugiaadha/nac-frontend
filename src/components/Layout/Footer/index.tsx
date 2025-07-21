@@ -7,7 +7,7 @@ import { useContext } from "react";
 import SiteSettingsContext from "@/context/SiteSettingsContext";
 import FooterSkeleton from "./FooterSkeleton";
 
-const footer = () => {
+const Footer = () => {
   const siteSettings = useContext(SiteSettingsContext);
         
   if (!siteSettings) return <FooterSkeleton />;
@@ -122,4 +122,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
