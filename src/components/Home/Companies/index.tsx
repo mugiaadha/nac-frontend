@@ -62,10 +62,15 @@ const Companies = () => {
               <div key={i}>
                 <Image
                   src={`${getImagePrefix()}${item.imgSrc}`}
-                  style={{ width: "50s%", height: "auto" }}
                   alt={item.imgSrc}
                   width={116}
                   height={36}
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    maxWidth: "116px",
+                    maxHeight: "36px"
+                  }}
                 />
               </div>
             ))}
