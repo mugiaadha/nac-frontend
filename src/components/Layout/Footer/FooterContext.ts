@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { FooterType } from "./footerReducer";
+import { SiteSettings } from "./footerReducer";
 
-const FooterContext = createContext<FooterType | null>(null);
+const FooterContext = createContext<SiteSettings | null>(null);
 export default FooterContext;
