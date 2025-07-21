@@ -6,9 +6,20 @@ import { HeaderItem } from "../../../../types/menu";
 
 const MobileHeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   const handleToggle = () => {
     setSubmenuOpen(!submenuOpen);
+  };
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleImageError = () => {
+    setIsLoading(false);
+    setHasError(true);
   };
 
   const siteSettings = useContext(SiteSettingsContext);
@@ -19,16 +30,38 @@ const MobileHeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
         onClick={item.submenu ? handleToggle : undefined}
         className="flex items-center justify-between w-full py-2 text-muted focus:outline-none"
       >
-        {siteSettings?.logo && (
-          <Image
-            src={siteSettings.logo}
-            alt="logo"
-            width={32}
-            height={32}
-            style={{ width: "auto", height: "auto" }}
-          />
-        )}
-        {item.label}
+        <div className="flex items-center gap-2">
+          {/* Logo with Skeleton */}
+          {siteSettings?.logo && (
+            <div className="relative">
+              {isLoading && (
+                <div className="w-8 h-8 bg-gray-200 animate-pulse rounded" />
+              )}
+              {!hasError && (
+                <Image
+                  src={siteSettings.logo}
+                  alt="logo"
+                  width={32}
+                  height={32}
+                  style={{ 
+                    width: "auto", 
+                    height: "auto",
+                    opacity: isLoading ? 0 : 1,
+                    transition: "opacity 0.3s ease"
+                  }}
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                />
+              )}
+              {hasError && !isLoading && (
+                <div className="w-8 h-8 bg-gray-100 text-gray-600 text-xs flex items-center justify-center rounded">
+                  L
+                </div>
+              )}
+            </div>
+          )}
+          {item.label}
+        </div>
         {item.submenu && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
