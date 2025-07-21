@@ -23,7 +23,7 @@ const Logo: React.FC = () => {
       {isLoading && siteSettings?.logo && (
         <div className="w-40 h-12 bg-gray-200 animate-pulse rounded" />
       )}
-      
+
       {siteSettings?.logo && !hasError && (
         <Image
           src={`${process.env.NEXT_PUBLIC_STORAGE_BASE_URL}/${siteSettings.logo}`}
@@ -31,18 +31,18 @@ const Logo: React.FC = () => {
           width={160}
           height={50}
           priority={true}
-          style={{ 
-            width: "auto", 
+          style={{
+            width: "auto",
             height: "auto",
             opacity: isLoading ? 0 : 1,
-            transition: "opacity 0.3s ease"
+            transition: "opacity 0.3s ease",
           }}
           quality={100}
           onLoad={handleImageLoad}
           onError={handleImageError}
         />
       )}
-      
+
       {/* Fallback for error or no logo */}
       {(hasError || !siteSettings?.logo) && !isLoading && (
         <div className="w-40 h-12 flex items-center justify-center bg-gray-100 text-gray-600 font-medium rounded">
